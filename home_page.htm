@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Service Home</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <!-- Add Boxicons CSS -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    :root {
+      --primary: #007bff;
+      --secondary: #0056b3;
+      --premium: #ff6b6b;
+      --basic: #4ecdc4;
+      --general: #a0d8ef;
+      --light-bg: #f4f4f9;
+      --text-dark: #333;
+      --text-light: #fff;
+      --border-color: #ccc;
+      --shine-color: rgba(255, 255, 255, 0.8);
+      --card-bg: #fff;
+      --body-bg: #f4f4f9;
+      --footer-bg: linear-gradient(135deg, var(--primary), var(--secondary));
+      --nav-bg: var(--secondary);
+    }
+    header {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    background: #007BFF;
+    color: white;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+/* Time and date styling */
+.date-time {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 1rem;
+    color: #f1f1f1;
+    font-weight: bold;
+    z-index: 2;
+}
+
+/* Styling for better readability */
+h1 {
+    margin: 8px;
+}
+    /* Container styling */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Fullscreen video */
+.video-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Behind the content */
+}
+
+/* Text content on top of video */
+.overlay-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 2; /* On top of the video */
+    width: 80%;
+    max-width: 900px;
+}
+
+/* Text styling */
+.overlay-content h1, .overlay-content p {
+    margin: 0 0 20px;
+    font-size: 2rem;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7); /* Added text shadow for readability */
+}
+
+/* Button styling */
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.5);
+}
+
+.btn:hover {
+    background: #0056b3;
+}
+
+    /* Dark mode variables */
+    .dark-mode {
+      --light-bg: #1a1a1a;
+      --text-dark: #f0f0f0;
+      --text-light: #e0e0e0;
+      --card-bg: #2d2d2d;
+      --body-bg: #121212;
+      --footer-bg: linear-gradient(135deg, #0d3b66, #1a2e4d);
+      --nav-bg: #1a2e4d;
+      --border-color: #444;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--body-bg);
+      color: var(--text-dark);
+      line-height: 1.6;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--text-light);
+      padding: 15px 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    header::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to right,
+        transparent 0%,
+        var(--shine-color) 50%,
+        transparent 100%
+      );
+      transform: rotate(30deg);
+      animation: shine 5s infinite;
+    }
+    
+    @keyframes shine {
+      0% { left: -100%; }
+      20%, 100% { left: 100%; }
+    }
+    
+    nav {
+      display: flex;
+      justify-content: center;
+      background: var(--nav-bg);
+      padding: 10px 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: relative;
+      transition: background 0.5s ease;
+    }
+    
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 18px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+    }
+    
+    nav a:hover {
+      transform: translateY(-3px);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: white;
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    nav a i {
+      margin-right: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    nav a:hover i {
+      transform: scale(1.3) rotate(10deg);
+      color: #fff;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+    }
+
+    /* Theme toggle button */
+    .theme-toggle {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.2);
+      border: none;
+      border-radius: 50px;
+      width: 40px;
+      height: 40px;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateY(-50%) scale(1.1);
+    }
+    
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 100px 20px;
+      background: url('car-service.jpg') no-repeat center center/cover;
+      color: white;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 91, 187, 0.5));
+    }
+    
+    .hero h1, .hero p {
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      animation: fadeInDown 1s ease;
+    }
+    
+    .hero p {
+      font-size: 1.5rem;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      animation: fadeInUp 1s ease;
+    }
+    
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--text-light);
+      padding: 15px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-top: 20px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      animation: pulse 2s infinite;
+    }
+    
+    .btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      letter-spacing: 1px;
+    }
+    
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+      );
+      transition: 0.5s;
+      z-index: -1;
+    }
+    
+    .btn:hover::after {
+      left: 100%;
+    }
+
+    /* Special Offers Section */
+    .offers {
+      padding: 60px 20px;
+      background-color: var(--card-bg);
+      transition: background-color 0.5s ease;
+    }
+
+    .offers-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+      color: var(--primary);
+      font-size: 2.5rem;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    .offer-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .offer-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      width: 350px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .offer-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+
+    .offer-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--premium);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .offer-card h3 {
+      color: var(--primary);
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
+
+    .offer-card .price {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--text-dark);
+      margin: 15px 0;
+    }
+
+    .offer-card .price span {
+      font-size: 1.2rem;
+      text-decoration: line-through;
+      color: #888;
+      margin-left: 10px;
+    }
+
+    .offer-card ul {
+      list-style-type: none;
+      margin: 20px 0;
+    }
+
+    .offer-card ul li {
+      margin-bottom: 10px;
+      padding-left: 25px;
+      position: relative;
+    }
+
+    .offer-card ul li::before {
+      content: '\f00c';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+
+    .offer-card .offer-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .offer-card .offer-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 50px 20px;
+      background-color: var(--light-bg);
+      transition: background-color 0.5s ease;
+    }
+    
+    .feature {
+      background: var(--card-bg);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      margin: 20px;
+      padding: 30px;
+      width: 350px;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    
+    .feature:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+    
+    .feature::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to bottom right,
+        transparent 0%,
+        rgba(255,255,255,0.3) 50%,
+        transparent 100%
+      );
+      transform: rotate(30deg);
+      animation: shine 6s infinite;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .feature:hover::before {
+      opacity: 1;
+    }
+    
+    .feature-icon {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+      transition: all 0.4s ease;
+    }
+    
+    .feature:hover .feature-icon {
+      transform: scale(1.2) rotate(10deg);
+      animation: bounce 0.5s ease;
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0) scale(1.2) rotate(10deg); }
+      50% { transform: translateY(-10px) scale(1.2) rotate(10deg); }
+    }
+    
+    .feature h3 {
+      margin-bottom: 15px;
+      color: var(--primary);
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .feature:hover h3 {
+      letter-spacing: 1px;
+    }
+    
+    .feature p {
+      color: var(--text-dark);
+      font-size: 1.1rem;
+    }
+
+    /* Stats Section */
+    .stats {
+      padding: 60px 20px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-align: center;
+    }
+
+    .stats-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+
+    .stat-item {
+      margin: 20px;
+      padding: 30px;
+      width: 200px;
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .stat-label {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    
+    .work-gallery {
+      padding: 50px 20px;
+      text-align: center;
+      background: var(--light-bg);
+      transition: background-color 0.5s ease;
+    }
+    
+    .work-gallery h2 {
+      margin-bottom: 40px;
+      color: var(--primary);
+      font-size: 2.5rem;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .work-gallery h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+    
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .gallery-item {
+      position: relative;
+      width: 300px;
+      height: 200px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+    }
+    
+    .gallery-item:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .gallery-item:hover::after {
+      opacity: 1;
+    }
+    
+    .gallery-caption {
+      position: absolute;
+      bottom: -50px;
+      left: 0;
+      width: 100%;
+      padding: 15px;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      transition: bottom 0.3s ease;
+      z-index: 2;
+    }
+    
+    .gallery-item:hover .gallery-caption {
+      bottom: 0;
+    }
+
+    /* Testimonials Section */
+    .testimonials {
+      padding: 60px 20px;
+      background-color: var(--card-bg);
+      transition: background-color 0.5s ease;
+    }
+
+    .testimonials-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .testimonial-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .testimonial-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      width: 350px;
+      transition: all 0.3s ease;
+      border: 1px solid var(--border-color);
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+
+    .testimonial-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .testimonial-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 15px;
+      border: 3px solid var(--primary);
+    }
+
+    .testimonial-author {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .testimonial-role {
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    .testimonial-text {
+      font-style: italic;
+      margin-bottom: 15px;
+    }
+
+    .testimonial-rating {
+      color: #ffc107;
+      font-size: 1.2rem;
+    }
+
+    /* Newsletter Section */
+    .newsletter {
+      padding: 60px 20px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-align: center;
+    }
+
+    .newsletter-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .newsletter h2 {
+      margin-bottom: 20px;
+    }
+
+    .newsletter p {
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .newsletter-form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      min-width: 250px;
+      padding: 15px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .newsletter-btn {
+      padding: 15px 30px;
+      background: white;
+      color: var(--primary);
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .newsletter-btn:hover {
+      background: #f0f0f0;
+      transform: translateY(-3px);
+    }
+    
+    .footer {
+      text-align: center;
+      background: var(--footer-bg);
+      color: white;
+      padding: 30px 0;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.5s ease;
+    }
+    
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('pattern.png') repeat;
+      opacity: 0.1;
+    }
+    
+    .footer-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .social-icons {
+      margin: 20px 0;
+    }
+    
+    .social-icons a {
+      display: inline-block;
+      color: white;
+      font-size: 1.5rem;
+      margin: 0 15px;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+      transform: translateY(-5px) scale(1.2);
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+    }
+    
+    .footer p {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    /* Modal for gallery */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+      overflow: auto;
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 90%;
+      max-height: 90%;
+      margin-top: 5%;
+    }
+
+    .modal-caption {
+      margin: auto;
+      display: block;
+      width: 80%;
+      text-align: center;
+      color: white;
+      padding: 10px 0;
+      font-size: 1.2rem;
+    }
+
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: #ccc;
+    }
+
+    /* Floating Help Bubble */
+    .help-bubble {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background: #007BFF;
+        color: white;
+        border-radius: 50%;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+        cursor: pointer;
+        z-index: 9999;
+        transition: transform 0.3s;
+        user-select: none;
+    }
+
+    /* Hover Effect */
+    .help-bubble:hover {
+        background: #0056b3;
+        transform: scale(1.1);
+    }
+
+    /* Draggable Bubble */
+    .help-bubble:active {
+        cursor: grabbing;
+    }
+
+    /* Help Modal */
+    .help-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 10000;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .help-content {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        max-width: 400px;
+        width: 90%;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        animation: fadeIn 0.5s;
+    }
+
+    .help-content h2 {
+        color: #007BFF;
+    }
+
+    .help-content p, .help-content ul {
+        margin: 15px 0;
+        font-size: 16px;
+        color: #555;
+    }
+
+    .help-content button {
+        background: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: 0.3s;
+    }
+
+    .help-content button:hover {
+        background: #218838;
+    }
+
+    /* Close Button */
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 25px;
+        color: #333;
+        cursor: pointer;
+    }
+
+    .close-btn:hover {
+        color: red;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      nav {
+        flex-wrap: wrap;
+        padding-bottom: 50px;
+      }
+      
+      nav a {
+        margin: 5px 10px;
+        font-size: 16px;
+      }
+
+      .theme-toggle {
+        top: auto;
+        bottom: 10px;
+        right: 50%;
+        transform: translateX(50%);
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero p {
+        font-size: 1.2rem;
+      }
+      
+      .feature, .offer-card, .testimonial-card {
+        width: 100%;
+        max-width: 350px;
+      }
+      
+      .gallery-item {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+      }
+
+      .newsletter-input, .newsletter-btn {
+        width: 100%;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      header {
+        padding: 12px 15px;
+      }
+      
+      .hero {
+        padding: 70px 20px;
+      }
+      
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+      }
+      
+      .btn {
+        padding: 12px 25px;
+        font-size: 1rem;
+      }
+      
+      .feature, .offer-card, .testimonial-card {
+        padding: 20px;
+      }
+      
+      .feature-icon {
+        font-size: 2.5rem;
+      }
+      
+      .feature h3, .offer-card h3 {
+        font-size: 1.3rem;
+      }
+
+      .section-title, .work-gallery h2 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="animate__animated animate__fadeIn">
+    <div class="date-time">
+        <span id="current-time"></span> | 
+        <span id="current-date"></span>
+    </div>
+    <h1>Instant Motor Wash Booking</h1>
+</header>
+  
+  <nav class="animate__animated animate__fadeIn animate__delay-1s">
+    <a href="home_page.htm"><i class="fas fa-home"></i> Home</a>
+    <a href="services.htm"><i class="fas fa-tools"></i> Services</a>
+    <a href="book_appointment.html"><i class="fas fa-calendar-check"></i> Book</a>
+    <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+    <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+    <a href="login.htm"><i class="fas fa-sign-in-alt"></i> Login</a>
+    <button class="theme-toggle" id="themeToggle">
+      <i class="fas fa-moon"></i>
+    </button>
+  </nav>
+  <div class="hero animate__animated animate__fadeIn">
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="motion.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="overlay-content">
+        <h1>Your Trusted Car Service Partner</h1>
+        <p>Experience the best car maintenance, repair, and inspection services tailored to your needs.</p>
+        <a href="book_appointment.html" class="btn animate__animated animate__pulse animate__infinite animate__slower">
+            <i class="fas fa-calendar-plus"></i> Book Now
+        </a>
+    </div>
+</div>
+  
+
+  <!-- Special Offers Section -->
+  <section class="offers">
+    <div class="offers-container">
+      <h2 class="section-title animate__animated animate__fadeIn">Special Offers</h2>
+      <div class="offer-cards">
+        <div class="offer-card animate__animated animate__fadeInUp">
+          <div class="offer-badge">Limited Time</div>
+          <h3>Summer Maintenance Package</h3>
+          <div class="price">₹2,999 <span>₹3,999</span></div>
+          <ul>
+            <li>Complete AC system check</li>
+            <li>Coolant flush and replacement</li>
+            <li>Battery inspection</li>
+            <li>Tire rotation and pressure check</li>
+          </ul>
+          <a href="book_appointment.html" class="offer-btn">Get Offer</a>
+        </div>
+        
+        <div class="offer-card animate__animated animate__fadeInUp animate__delay-1s">
+          <div class="offer-badge">Popular</div>
+          <h3>Full Detailing Package</h3>
+          <div class="price">₹4,499 <span>₹5,999</span></div>
+          <ul>
+            <li>Exterior wash and wax</li>
+            <li>Interior deep cleaning</li>
+            <li>Leather conditioning</li>
+            <li>Engine bay cleaning</li>
+          </ul>
+          <a href="book_appointment.html" class="offer-btn">Get Offer</a>
+        </div>
+        
+        <div class="offer-card animate__animated animate__fadeInUp animate__delay-2s">
+          <div class="offer-badge">New</div>
+          <h3>First-Time Customer Deal</h3>
+          <div class="price">₹1,499 <span>₹2,499</span></div>
+          <ul>
+            <li>Basic oil change</li>
+            <li>Fluid level check</li>
+            <li>Brake inspection</li>
+            <li>Free car wash</li>
+          </ul>
+          <a href="book_appointment.html" class="offer-btn">Get Offer</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="features">
+    <div class="feature animate__animated animate__fadeInUp">
+      <div class="feature-icon"><i class="fas fa-medal"></i></div>
+      <h3>Quality Service</h3>
+      <p>Our team provides top-notch services to ensure your car performs at its best with certified quality standards.</p>
+    </div>
+    <div class="feature animate__animated animate__fadeInUp animate__delay-1s">
+      <div class="feature-icon"><i class="fas fa-user-tie"></i></div>
+      <h3>Expert Technicians</h3>
+      <p>Our experienced professionals are trained to handle all car brands and models with precision and care.</p>
+    </div>
+    <div class="feature animate__animated animate__fadeInUp animate__delay-2s">
+      <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+      <h3>Convenient Booking</h3>
+      <p>Book your car service online with just a few clicks and get instant confirmation for your appointment.</p>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats">
+    <div class="stats-container">
+      <div class="stat-item">
+        <div class="stat-number" id="happyCustomers">0</div>
+        <div class="stat-label">Happy Customers</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="servicesDone">0</div>
+        <div class="stat-label">Services Done</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="yearsExperience">0</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="expertStaff">0</div>
+        <div class="stat-label">Expert Staff</div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="work-gallery">
+    <h2 class="animate__animated animate__fadeIn">Our Work</h2>
+    <div class="gallery">
+      <div class="gallery-item animate__animated animate__fadeIn" onclick="openModal('work1.jpg', 'Engine Repair')">
+        <img src="iii.jpg" alt="Car Repair">
+        <div class="gallery-caption">Engine Repair</div>
+      </div>
+      <div class="gallery-item animate__animated animate__fadeIn animate__delay-1s" onclick="openModal('work2.jpg', 'Regular Maintenance')">
+        <img src="car_maintain.jpg" alt="Car Maintenance">
+        <div class="gallery-caption">Regular Maintenance</div>
+      </div>
+      <div class="gallery-item animate__animated animate__fadeIn animate__delay-2s" onclick="openModal('work3.jpg', 'Full Inspection')">
+        <img src="full.jpg" alt="Car Inspection">
+        <div class="gallery-caption">Full Inspection</div>
+      </div>
+      <div class="gallery-item animate__animated animate__fadeIn animate__delay-3s" onclick="openModal('work4.jpg', 'Engine Service')">
+        <img src="engine.jpg" alt="Engine Service">
+        <div class="gallery-caption">Engine Service</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <div class="testimonials-container">
+      <h2 class="section-title animate__animated animate__fadeIn">What Our Customers Say</h2>
+      <div class="testimonial-cards">
+        <div class="testimonial-card animate__animated animate__fadeInUp">
+          <div class="testimonial-header">
+            <img src="customer1.jpg" alt="Customer" class="testimonial-avatar">
+            <div>
+              <div class="testimonial-author">Rajesh Kumar</div>
+              <div class="testimonial-role">Regular Customer</div>
+            </div>
+          </div>
+          <div class="testimonial-text">
+            "I've been taking my car here for years and the service is always exceptional. The team is knowledgeable and honest about what needs to be done."
+          </div>
+          <div class="testimonial-rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+        </div>
+        
+        <div class="testimonial-card animate__animated animate__fadeInUp animate__delay-1s">
+          <div class="testimonial-header">
+            <img src="customer2.jpg" alt="Customer" class="testimonial-avatar">
+            <div>
+              <div class="testimonial-author">Priya Sharma</div>
+              <div class="testimonial-role">First-time Customer</div>
+            </div>
+          </div>
+          <div class="testimonial-text">
+            "The first-time customer deal was amazing! My car runs so much better after their service. Will definitely come back for all my car needs."
+          </div>
+          <div class="testimonial-rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+          </div>
+        </div>
+        
+        <div class="testimonial-card animate__animated animate__fadeInUp animate__delay-2s">
+          <div class="testimonial-header">
+            <img src="customer3.jpg" alt="Customer" class="testimonial-avatar">
+            <div>
+              <div class="testimonial-author">Amit Patel</div>
+              <div class="testimonial-role">Business Owner</div>
+            </div>
+          </div>
+          <div class="testimonial-text">
+            "We trust them with our entire fleet of vehicles. Their attention to detail and timely service keeps our business running smoothly."
+          </div>
+          <div class="testimonial-rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter">
+    <div class="newsletter-container">
+      <h2 class="animate__animated animate__fadeIn">Subscribe to Our Newsletter</h2>
+      <p class="animate__animated animate__fadeIn">Get the latest offers, maintenance tips, and service updates directly to your inbox.</p>
+      <form class="newsletter-form animate__animated animate__fadeIn">
+        <input type="email" class="newsletter-input" placeholder="Your email address" required>
+        <button type="submit" class="newsletter-btn">Subscribe</button>
+      </form>
+    </div>
+  </section>
+  
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+      <p>&copy; 2025 Car Service. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Gallery Modal -->
+  <div id="galleryModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+    <div id="modalCaption" class="modal-caption"></div>
+  </div>
+
+  <!-- Help Bubble -->
+  <div id="help-bubble" class="help-bubble" onclick="showHelp()">
+    ❓
+  </div>
+
+  <!-- Help Modal -->
+  <div id="help-modal" class="help-modal">
+    <div class="help-content">
+      <span class="close-btn" onclick="closeHelp()">&times;</span>
+      <h2>Need Help?</h2>
+      <p>Welcome! 😊 Here are some tips to navigate:</p>
+      <ul>
+        <li>💡 <strong>Book Now:</strong> Click the 'Book Now' button to schedule your service.</li>
+        <li>🚗 <strong>Services:</strong> Browse all car services offered.</li>
+        <li>📞 <strong>Contact:</strong> Reach out to us for any inquiries.</li>
+      </ul>
+      <button onclick="closeHelp()">Got it!</button>
+    </div>
+  </div>
+
+  <!-- Add Boxicons JS at the bottom before your custom script -->
+  <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+  
+  <script>
+    function updateTimeAndDate() {
+    const timeElement = document.getElementById("current-time");
+    const dateElement = document.getElementById("current-date");
+
+    const now = new Date();
+    
+    // Time formatting
+    const hours = now.getHours().toString().padStart(2, "0");
+    const minutes = now.getMinutes().toString().padStart(2, "0");
+    const seconds = now.getSeconds().toString().padStart(2, "0");
+    const timeString = `${hours}:${minutes}:${seconds}`;
+
+    // Date formatting
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    const dateString = now.toLocaleDateString("en-US", options);
+
+    // Update the elements
+    timeElement.textContent = timeString;
+    dateElement.textContent = dateString;
+}
+
+// Update every second
+setInterval(updateTimeAndDate, 1000);
+
+// Initialize immediately
+updateTimeAndDate();
+
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('i');
+    
+    // Check for saved theme preference or use preferred color scheme
+    const savedTheme = localStorage.getItem('theme') || 
+                      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    
+    // Apply the saved theme
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+      themeIcon.classList.replace('fa-moon', 'fa-sun');
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      
+      if (document.body.classList.contains('dark-mode')) {
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'light');
+      }
+    });
+
+    // Animation trigger on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      const animateElements = document.querySelectorAll('.feature, .gallery-item, .offer-card, .testimonial-card');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      animateElements.forEach(el => {
+        el.style.opacity = 0;
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+      });
+
+      // Animate stats counter
+      animateStats();
+    });
+
+    // Animate statistics numbers
+    function animateStats() {
+      const counters = [
+        { element: 'happyCustomers', target: 1250, duration: 2000 },
+        { element: 'servicesDone', target: 5240, duration: 2000 },
+        { element: 'yearsExperience', target: 12, duration: 2000 },
+        { element: 'expertStaff', target: 25, duration: 2000 }
+      ];
+
+      counters.forEach(counter => {
+        const element = document.getElementById(counter.element);
+        const increment = counter.target / (counter.duration / 16); // 60fps
+        let current = 0;
+
+        const updateCounter = () => {
+          current += increment;
+          if (current < counter.target) {
+            element.textContent = Math.floor(current);
+            requestAnimationFrame(updateCounter);
+          } else {
+            element.textContent = counter.target;
+          }
+        };
+
+        updateCounter();
+      });
+    }
+
+    // Gallery modal functions
+    function openModal(imgSrc, caption) {
+      const modal = document.getElementById('galleryModal');
+      const modalImg = document.getElementById('modalImage');
+      const captionText = document.getElementById('modalCaption');
+      
+      modal.style.display = "block";
+      modalImg.src = imgSrc;
+      captionText.innerHTML = caption;
+    }
+
+    function closeModal() {
+      document.getElementById('galleryModal').style.display = "none";
+    }
+
+    // Close modal when clicking outside the image
+    window.onclick = function(event) {
+      const modal = document.getElementById('galleryModal');
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    // Newsletter form submission
+    const newsletterForm = document.querySelector('.newsletter-form');
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const emailInput = this.querySelector('.newsletter-input');
+        alert(`Thank you for subscribing with ${emailInput.value}! You'll receive our next newsletter soon.`);
+        emailInput.value = '';
+      });
+    }
+
+    // Help bubble functionality
+    function showHelp() {
+      document.getElementById("help-modal").style.display = "flex";
+    }
+
+    function closeHelp() {
+      document.getElementById("help-modal").style.display = "none";
+    }
+
+    // Draggable bubble functionality
+    const bubble = document.getElementById("help-bubble");
+
+    let isDragging = false;
+    let offsetX, offsetY;
+
+    bubble.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      offsetX = e.clientX - bubble.getBoundingClientRect().left;
+      offsetY = e.clientY - bubble.getBoundingClientRect().top;
+      bubble.style.transition = "none"; // Disable transition while dragging
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+
+      const x = e.clientX - offsetX;
+      const y = e.clientY - offsetY;
+
+      // Keep the bubble inside the window boundaries
+      const maxX = window.innerWidth - bubble.offsetWidth;
+      const maxY = window.innerHeight - bubble.offsetHeight;
+
+      bubble.style.left = `${Math.min(Math.max(0, x), maxX)}px`;
+      bubble.style.top = `${Math.min(Math.max(0, y), maxY)}px`;
+    });
+
+    document.addEventListener("mouseup", () => {
+      isDragging = false;
+      bubble.style.transition = "transform 0.3s";  // Restore transition effect
+    });
+  </script>
+</body>
+</html>

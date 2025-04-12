@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Services - Motor Wash & More</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <!-- Add Boxicons CSS -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    :root {
+      --primary: #007bff;
+      --secondary: #0056b3;
+      --premium: #ff6b6b;
+      --basic: #4ecdc4;
+      --general: #a0d8ef;
+      --light-bg: #f4f4f9;
+      --text-dark: #333;
+      --text-light: #fff;
+      --border-color: #ccc;
+      --shine-color: rgba(255, 255, 255, 0.8);
+    }
+    
+    /* Overall Theme */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--light-bg);
+      color: var(--text-dark);
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--text-light);
+      padding: 15px 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    header::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to right,
+        transparent 0%,
+        var(--shine-color) 50%,
+        transparent 100%
+      );
+      transform: rotate(30deg);
+      animation: shine 5s infinite;
+    }
+    
+    @keyframes shine {
+      0% { left: -100%; }
+      20%, 100% { left: 100%; }
+    }
+    
+    nav {
+      display: flex;
+      justify-content: center;
+      background: var(--secondary);
+      padding: 10px 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 18px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+    }
+    
+    nav a:hover {
+      transform: translateY(-3px);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: white;
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    nav a i {
+      margin-right: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    nav a:hover i {
+      transform: scale(1.3) rotate(10deg);
+      color: #fff;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+    }
+    
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 80px 20px;
+      background: url('car-service.jpg') no-repeat center center/cover;
+      color: white;
+    }
+    
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+    }
+    
+    .hero h1, .hero p {
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+    
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      animation: fadeInDown 1s ease;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      animation: fadeInUp 1s ease;
+    }
+    
+    /* Service Category Buttons */
+    .service-categories {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 30px 20px;
+      background: #f0f0f0;
+    }
+    
+    .category-btn {
+      padding: 15px 30px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .category-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    
+    .category-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+      );
+      transition: 0.5s;
+    }
+    
+    .category-btn:hover::after {
+      left: 100%;
+    }
+    
+    .category-btn.active {
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      transform: translateY(-3px);
+    }
+    
+    .category-btn i {
+      margin-right: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .category-btn:hover i {
+      transform: scale(1.3) rotate(10deg);
+    }
+    
+    /* Gallery Styling */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      padding: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .gallery-item {
+      position: relative;
+      width: 320px;
+      height: 420px;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      background: white;
+    }
+    
+    .gallery-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 60%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    
+    .overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      color: var(--text-dark);
+      padding: 20px;
+      height: 40%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    
+    .overlay h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+      color: var(--primary);
+    }
+    
+    .overlay p {
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+    }
+    
+    .overlay .price {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--secondary);
+      margin: 10px 0;
+    }
+    
+    .book-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-align: center;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    
+    .book-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    /* Service Type Indicators */
+    .service-type {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      padding: 6px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 13px;
+      color: white;
+      z-index: 2;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    
+    .premium {
+      background: linear-gradient(135deg, #ff6b6b, #ff4757);
+    }
+    
+    .basic {
+      background: linear-gradient(135deg, #4ecdc4, #1dd1a1);
+    }
+    
+    .general {
+      background: linear-gradient(135deg, #a0d8ef, #48dbfb);
+    }
+    
+    /* Service Features */
+    .service-features {
+      list-style-type: none;
+      padding: 0;
+      margin: 10px 0;
+    }
+    
+    .service-features li {
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 25px;
+      font-size: 0.9rem;
+    }
+    
+    .service-features li::before {
+      content: '\f00c';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+    
+    .premium-feature li::before {
+      color: #ff4757;
+    }
+    
+    .basic-feature li::before {
+      color: #1dd1a1;
+    }
+    
+    /* Filtering Effects */
+    .gallery-item.hidden {
+      display: none;
+    }
+    
+    .gallery-item.highlight {
+      transform: scale(1.05);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+      border: 3px solid var(--primary);
+    }
+    
+    /* Footer */
+    .footer {
+      text-align: center;
+      background: #333;
+      color: white;
+      padding: 30px 0;
+      margin-top: 50px;
+    }
+    
+    .footer p {
+      margin: 0;
+      font-size: 1rem;
+    }
+    
+    .footer-links {
+      margin-top: 20px;
+    }
+    
+    .footer-links a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .animate-delay-1 {
+      animation-delay: 0.3s;
+    }
+    
+    .animate-delay-2 {
+      animation-delay: 0.6s;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+      .gallery {
+        max-width: 1000px;
+      }
+    }
+    
+    @media (max-width: 992px) {
+      .gallery-item {
+        width: 280px;
+        height: 380px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      nav {
+        flex-wrap: wrap;
+      }
+      
+      nav a {
+        margin: 5px 10px;
+        font-size: 16px;
+      }
+      
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+      }
+      
+      .gallery-item {
+        width: 100%;
+        max-width: 350px;
+        height: auto;
+      }
+      
+      .gallery-item img {
+        height: 250px;
+      }
+      
+      .overlay {
+        position: relative;
+        height: auto;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .service-categories {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .category-btn {
+        width: 80%;
+      }
+      
+      .hero {
+        padding: 60px 20px;
+      }
+      
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header and Navigation -->
+  <header class="animate__animated animate__fadeIn">
+    <h1>Motor Wash & More</h1>
+  </header>
+  
+  <nav class="animate__animated animate__fadeIn animate__delay-1s">
+    <a href="home.htm"><i class="fas fa-home"></i> Home</a>
+    <a href="services.htm"><i class="fas fa-tools"></i> Services</a>
+    <a href="book_appointment.html"><i class="fas fa-calendar-check"></i> Book</a>
+    <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+    <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+    <a href="login.htm"><i class="fas fa-sign-in-alt"></i> Login</a>
+  </nav>
+  
+  <!-- Hero Section -->
+  <div class="hero">
+    <h1 class="animate__animated animate__fadeInDown">Our Services</h1>
+    <p class="animate__animated animate__fadeInUp">Choose from our range of premium, basic, and general vehicle services</p>
+  </div>
+  
+  <!-- Service Category Buttons -->
+  <div class="service-categories">
+    <button class="category-btn active animate__animated animate__fadeIn animate-delay-1" data-category="all">
+      <i class="fas fa-star"></i> All Services
+    </button>
+    <button class="category-btn animate__animated animate__fadeIn animate-delay-1" data-category="premium">
+      <i class="fas fa-crown"></i> Premium
+    </button>
+    <button class="category-btn animate__animated animate__fadeIn animate-delay-1" data-category="basic">
+      <i class="fas fa-car"></i> Basic
+    </button>
+    <button class="category-btn animate__animated animate__fadeIn animate-delay-1" data-category="general">
+      <i class="fas fa-broom"></i> General
+    </button>
+  </div>
+  
+  <!-- Gallery Section with Categorized Services -->
+  <section class="gallery">
+    <!-- Premium Services -->
+    <div class="gallery-item animate__animated animate__fadeIn animate-delay-2" data-category="premium">
+      <div class="service-type premium">Premium</div>
+      <img src="image.png" alt="Diamond Detailing">
+      <div class="overlay">
+        <h3>Diamond Detailing</h3>
+        <p>Complete exterior and interior detailing with ceramic coating</p>
+        <ul class="service-features premium-feature">
+          <li>Paint correction</li>
+          <li>Ceramic coating</li>
+          <li>Leather treatment</li>
+        </ul>
+        <div class="price">$199.99</div>
+        <a href="book_appointment.html" class="book-btn">Book Now</a>
+      </div>
+    </div>
+    
+    <div class="gallery-item animate__animated animate__fadeIn animate-delay-2" data-category="premium">
+      <div class="service-type premium">Premium</div>
+      <img src="img2.jpg" alt="Leather Restoration">
+      <div class="overlay">
+        <h3>Leather Restoration</h3>
+        <p>Professional leather cleaning and conditioning</p>
+        <ul class="service-features premium-feature">
+          <li>Deep cleaning</li>
+          <li>Conditioning</li>
+          <li>UV protection</li>
+        </ul>
+        <div class="price">$149.99</div>
+        <a href="book_appointment.html" class="book-btn">Book Now</a>
+      </div>
+    </div>
+    
+    <div class="gallery-item animate__animated animate__fadeIn animate-delay-2" data-category="premium">
+      <div class="service-type premium">Premium</div>
+      <img src="img3.jpg" alt="Engine Bay Detail">
+      <div class="overlay">
+        <h3>Engine Bay Detail</h3>
+        <p>Complete engine cleaning and dressing</p>
+        <ul class="service-features premium-feature">
+          <li>Degreasing</li>
+          <li>Protective coating</li>
+          <li>Component dressing</li>
+        </ul>
+        <div class="price">$129.99</div>
+        <a href="book_appointment.html" class="book-btn">Book Now</a>
+      </div>
+    </div>
+    
+    <!-- Basic Services -->
+    <div class="gallery-item animate__animated animate__fadeIn animate-delay-2" data-category="basic">
+      <div class="service-type basic">Basic</div>
+      <img src="img4.jpg" alt="Express Wash">
+      <div class="overlay">
+        <h3>Express Wash</h3>
+        <p>Quick exterior wash and dry</p>
+        <ul class="service-features">
+          <li>Foam wash</li>
+          <li>Hand dry</li>
+          <li>Window clean</li>
+        </ul>
+        <div class="price">$19.99</div>
+        <a href="book_appointment.html" class="book-btn">Book Now</a>
+      </div>
+    </div>
+    
+    <div class="gallery-item animate__animated animate__fadeIn animate-delay-2" data-category="basic">
+      <div class="service-type basic">Basic</div>
+      <img src="img5.jpg" alt="Interior Vacuum">
+      <div class="overlay">
+        <h3>Interior Vacuum</h3>
+        <p>Complete interior vacuum and wipe down</p>
+        <ul class="service-features">
+          <li>Full vacuum</li>
+          <li>Dashboard wipe</li>
+          <li>Door panels</li>
+        </ul>
+        <div class="price">$24.99</div>
+        <a href="book_appointment.html" class="book-btn">Book Now</a>
+      </div>
+    </div>
+    
+    <div class="gallery-item animate__animated animate__fadeIn animate-delay-2" data-category="basic">
+      <div class="service-type basic">Basic</div>
+      <img src="img6.jpg" alt="Window Cleaning">
+      <div class="overlay">
+        <h3>Window Cleaning</h3>
+        <p>Streak-free window cleaning inside and out</p>
+        <ul class="service-features">
+          <li>Interior windows</li>
+          <li>Exterior windows</li>
+          <li>Mirrors</li>
+        </ul>
+        <div class="price">$14.99</div>
+        <a href="book_appointment.html" class="book-btn">Book Now</a>
+      </div>
+    </div>
+    
+    <!-- General Services -->
+    <div class="gallery-item animate__animated animate__fadeIn animate-delay-2" data-category="general">
+      <div class="service-type general">General</div>
+      <img src="img7.jpg" alt="Standard Wash">
+      <div class="overlay">
+        <h3>Standard Wash</h3>
+        <p>Exterior wash with wheel cleaning</p>
+        <ul class="service-features">
+          <li>Hand wash</li>
+          <li>Wheel cleaning</li>
+          <li>Tire dressing</li>
+        </ul>
+        <div class="price">$29.99</div>
+        <a href="book_appointment.html" class="book-btn">Book Now</a>
+      </div>
+    </div>
+    
+    <div class="gallery-item animate__animated animate__fadeIn animate-delay-2" data-category="general">
+      <div class="service-type general">General</div>
+      <img src="img8.jpg" alt="Wax Application">
+      <div class="overlay">
+        <h3>Wax Application</h3>
+        <p>Hand-applied wax for shine and protection</p>
+        <ul class="service-features">
+          <li>Premium wax</li>
+          <li>Hand application</li>
+          <li>Buff finish</li>
+        </ul>
+        <div class="price">$39.99</div>
+        <a href="book_appointment.html" class="book-btn">Book Now</a>
+      </div>
+    </div>
+    
+    <div class="gallery-item animate__animated animate__fadeIn animate-delay-2" data-category="general">
+      <div class="service-type general">General</div>
+      <img src="imgg9.jpg" alt="Tire Shine">
+      <div class="overlay">
+        <h3>Tire Shine</h3>
+        <p>Tire cleaning and dressing</p>
+        <ul class="service-features">
+          <li>Tire cleaning</li>
+          <li>Dressing application</li>
+          <li>Long-lasting shine</li>
+        </ul>
+        <div class="price">$12.99</div>
+        <a href="book_appointment.html" class="book-btn">Book Now</a>
+      </div>
+    </div>
+    
+    <div class="gallery-item animate__animated animate__fadeIn animate-delay-2" data-category="general">
+      <div class="service-type general">General</div>
+      <img src="img10.jpg" alt="Interior Refresh">
+      <div class="overlay">
+        <h3>Interior Refresh</h3>
+        <p>Basic interior cleaning and air freshener</p>
+        <ul class="service-features">
+          <li>Vacuum</li>
+          <li>Surface wipe</li>
+          <li>Air freshener</li>
+        </ul>
+        <div class="price">$34.99</div>
+        <a href="book_appointment.html" class="book-btn">Book Now</a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="home.htm">Home</a>
+      <a href="services.htm">Services</a>
+      <a href="book.html">Book</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.htm">Login</a>
+    </div>
+    <p>&copy; 2025 Motor Wash & More. All rights reserved.</p>
+  </footer>
+
+  <!-- Add Boxicons JS at the bottom before your custom script -->
+  <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const categoryButtons = document.querySelectorAll('.category-btn');
+      const galleryItems = document.querySelectorAll('.gallery-item');
+      
+      // Add click event listeners to category buttons
+      categoryButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Remove active class from all buttons
+          categoryButtons.forEach(btn => btn.classList.remove('active'));
+          // Add active class to clicked button
+          this.classList.add('active');
+          
+          const category = this.getAttribute('data-category');
+          
+          // Filter gallery items
+          galleryItems.forEach(item => {
+            item.classList.remove('highlight');
+            
+            if (category === 'all') {
+              item.classList.remove('hidden');
+              // Add animation when showing all items
+              item.style.animation = 'fadeIn 0.5s ease';
+            } else {
+              if (item.getAttribute('data-category') === category) {
+                item.classList.remove('hidden');
+                item.classList.add('highlight');
+                // Add animation for filtered items
+                item.style.animation = 'fadeIn 0.5s ease';
+              } else {
+                item.classList.add('hidden');
+              }
+            }
+          });
+        });
+      });
+      
+      // Add hover effect to gallery items
+      galleryItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+          if (!this.classList.contains('hidden')) {
+            this.classList.add('highlight');
+          }
+        });
+        
+        item.addEventListener('mouseleave', function() {
+          const activeCategory = document.querySelector('.category-btn.active').getAttribute('data-category');
+          const itemCategory = this.getAttribute('data-category');
+          
+          if (activeCategory !== 'all' && activeCategory !== itemCategory) {
+            this.classList.remove('highlight');
+          }
+        });
+      });
+      
+      // Initialize animations
+      setTimeout(() => {
+        document.querySelectorAll('.animate-delay-1').forEach(el => {
+          el.style.opacity = '1';
+        });
+      }, 300);
+      
+      setTimeout(() => {
+        document.querySelectorAll('.animate-delay-2').forEach(el => {
+          el.style.opacity = '1';
+        });
+      }, 600);
+    });
+  </script>
+</body>
+</html>

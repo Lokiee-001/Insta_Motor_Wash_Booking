@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Car Service</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <!-- Add Boxicons CSS -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    :root {
+      --primary: #007bff;
+      --secondary: #0056b3;
+      --premium: #ff6b6b;
+      --basic: #4ecdc4;
+      --general: #a0d8ef;
+      --light-bg: #f4f4f9;
+      --text-dark: #333;
+      --text-light: #fff;
+      --border-color: #ccc;
+      --shine-color: rgba(255, 255, 255, 0.8);
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--text-light);
+      padding: 15px 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    header::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to right,
+        transparent 0%,
+        var(--shine-color) 50%,
+        transparent 100%
+      );
+      transform: rotate(30deg);
+      animation: shine 5s infinite;
+    }
+    
+    @keyframes shine {
+      0% { left: -100%; }
+      20%, 100% { left: 100%; }
+    }
+    
+    nav {
+      display: flex;
+      justify-content: center;
+      background: var(--secondary);
+      padding: 10px 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 18px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+    }
+    
+    nav a:hover {
+      transform: translateY(-3px);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: white;
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    nav a i {
+      margin-right: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    nav a:hover i {
+      transform: scale(1.3) rotate(10deg);
+      color: #fff;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+    }
+    
+    .about-hero {
+      position: relative;
+      text-align: center;
+      padding: 100px 20px;
+      background: url('about-hero.jpg') no-repeat center center/cover;
+      color: white;
+      overflow: hidden;
+    }
+    
+    .about-hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 91, 187, 0.5));
+    }
+    
+    .about-hero h1, .about-hero p {
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .about-hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      animation: fadeInDown 1s ease;
+    }
+    
+    .about-hero p {
+      font-size: 1.5rem;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      animation: fadeInUp 1s ease;
+    }
+    
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--text-light);
+      padding: 15px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-top: 20px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      letter-spacing: 1px;
+    }
+    
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+      );
+      transition: 0.5s;
+      z-index: -1;
+    }
+    
+    .btn:hover::after {
+      left: 100%;
+    }
+    
+    .about-content {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+    
+    .about-section {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      margin: 40px 0;
+      padding: 40px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .about-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+    
+    .about-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to bottom right,
+        transparent 0%,
+        rgba(255,255,255,0.3) 50%,
+        transparent 100%
+      );
+      transform: rotate(30deg);
+      animation: shine 6s infinite;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .about-section:hover::before {
+      opacity: 1;
+    }
+    
+    .about-section h2 {
+      color: var(--primary);
+      margin-bottom: 20px;
+      font-size: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .about-section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 50px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+    
+    .about-section p {
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+    
+    .team {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 30px;
+    }
+    
+    .team-member {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 280px;
+      padding: 25px;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .team-member:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+    
+    .team-member-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 20px;
+      border: 5px solid var(--light-bg);
+      transition: all 0.4s ease;
+    }
+    
+    .team-member:hover .team-member-img {
+      transform: scale(1.1);
+      border-color: var(--primary);
+    }
+    
+    .team-member h3 {
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    
+    .team-member p {
+      color: var(--text-dark);
+      font-size: 1rem;
+      margin-bottom: 15px;
+    }
+    
+    .team-social {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .team-social a {
+      color: var(--primary);
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .team-social a:hover {
+      transform: translateY(-5px) scale(1.2);
+      color: var(--secondary);
+    }
+    
+    .values {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 30px;
+    }
+    
+    .value-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 350px;
+      padding: 30px;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .value-card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+    
+    .value-icon {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+      transition: all 0.4s ease;
+    }
+    
+    .value-card:hover .value-icon {
+      transform: scale(1.2) rotate(10deg);
+    }
+    
+    .value-card h3 {
+      color: var(--primary);
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
+    
+    .value-card p {
+      color: var(--text-dark);
+      font-size: 1.1rem;
+    }
+    
+    .footer {
+      text-align: center;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 30px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('pattern.png') repeat;
+      opacity: 0.1;
+    }
+    
+    .footer-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .social-icons {
+      margin: 20px 0;
+    }
+    
+    .social-icons a {
+      display: inline-block;
+      color: white;
+      font-size: 1.5rem;
+      margin: 0 15px;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+      transform: translateY(-5px) scale(1.2);
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+    }
+    
+    .footer p {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      nav {
+        flex-wrap: wrap;
+      }
+      
+      nav a {
+        margin: 5px 10px;
+        font-size: 16px;
+      }
+      
+      .about-hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .about-hero p {
+        font-size: 1.2rem;
+      }
+      
+      .about-section {
+        padding: 30px;
+      }
+      
+      .team-member {
+        width: 100%;
+        max-width: 280px;
+      }
+      
+      .value-card {
+        width: 100%;
+        max-width: 350px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      header {
+        padding: 12px 15px;
+      }
+      
+      .about-hero {
+        padding: 70px 20px;
+      }
+      
+      .about-hero h1 {
+        font-size: 2rem;
+      }
+      
+      .about-hero p {
+        font-size: 1rem;
+      }
+      
+      .btn {
+        padding: 12px 25px;
+        font-size: 1rem;
+      }
+      
+      .about-section {
+        padding: 20px;
+      }
+      
+      .about-section h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="animate_animated animate_fadeIn">
+    <h1>About Our Car Service</h1>
+  </header>
+  
+  <nav class="animate_animated animatefadeIn animate_delay-1s">
+    <a href="home_page.htm"><i class="fas fa-home"></i> Home</a>
+    <a href="services.htm"><i class="fas fa-tools"></i> Services</a>
+    <a href="book_appointment.html"><i class="fas fa-calendar-check"></i> Book</a>
+    <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+    <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+    <a href="login.htm"><i class="fas fa-sign-in-alt"></i> Login</a>
+  </nav>
+  
+  <div class="about-hero animate_animated animate_fadeIn">
+    <h1>Our Story</h1>
+    <p>Dedicated to excellence in car service since 2010</p>
+    
+  </div>
+  
+  <div class="about-content">
+    <section class="about-section animate_animated animate_fadeInUp">
+      <h2>Who We Are</h2>
+      <p>Car Service is a family-owned business founded in 2010 with a passion for automobiles and a commitment to honest, reliable service. What started as a small garage with two mechanics has grown into a full-service automotive center with state-of-the-art equipment and a team of certified professionals.</p>
+      <p>We believe in treating every customer like family and every vehicle as if it were our own. Our mission is to provide exceptional service at fair prices, building trust through transparency and quality workmanship.</p>
+    </section>
+    
+    <section class="about-section animate_animated animate_fadeInUp">
+      <h2>Our Team</h2>
+      <p>Meet the skilled professionals who make Car Service exceptional:</p>
+      
+      <div class="team">
+        <div class="team-member animate_animated animate_fadeIn">
+          <img src="sandeep.jpg" alt="saii" class="team-member-img">
+          <h3>Sai Teja</h3>
+          <p>Front_Developer</p>
+          <p></p>
+          <div class="team-social">
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        
+        <div class="team-member animate_animated animatefadeIn animate_delay-1s">
+          <img src="Siddu.jpg" alt="Deepu" class="team-member-img">
+          <h3>Sai Siddhartha</h3>
+          <p>Backend_developer  </p>
+          <p>Customer service specialist since 2012</p>
+          <div class="team-social">
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        
+        <div class="team-member animate_animated animatefadeIn animate_delay-2s">
+          <img src="Lokeshwar.jpg" alt="Lokiee" class="team-member-img">
+          <h3>Lokeshwar</h3>
+          <p>Full Stack Developer</p>
+          <p>Specialist in European vehicles</p>
+          <div class="team-social">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="about-section animate_animated animate_fadeInUp">
+      <h2>Our Values</h2>
+      <p>These principles guide everything we do at Car Service:</p>
+      
+      <div class="values">
+        <div class="value-card animate_animated animate_fadeIn">
+          <div class="value-icon"><i class="fas fa-handshake"></i></div>
+          <h3>Integrity</h3>
+          <p>We provide honest assessments and only recommend necessary services. No upselling, just straight talk.</p>
+        </div>
+        
+        <div class="value-card animate_animated animatefadeIn animate_delay-1s">
+          <div class="value-icon"><i class="fas fa-award"></i></div>
+          <h3>Quality</h3>
+          <p>We use premium parts and follow manufacturer specifications to ensure long-lasting repairs.</p>
+        </div>
+        
+        <div class="value-card animate_animated animatefadeIn animate_delay-2s">
+          <div class="value-icon"><i class="fas fa-heart"></i></div>
+          <h3>Care</h3>
+          <p>We treat your vehicle with the same care we'd give our own, from diagnostics to final detailing.</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="about-section animate_animated animate_fadeInUp">
+      <h2>Why Choose Us</h2>
+      <p>"We’re not just another car service—we’re your trusted partner. Here’s why customers choose us:</p>
+      <ul style="list-style-type: none; margin: 20px 0;">
+        <li style="margin-bottom: 10px; padding-left: 30px; position: relative;">
+          <i class="fas fa-check-circle" style="color: var(--primary); position: absolute; left: 0; top: 3px;"></i>
+          ASE-Certified Technicians with ongoing training
+        </li>
+        <li style="margin-bottom: 10px; padding-left: 30px; position: relative;">
+          <i class="fas fa-check-circle" style="color: var(--primary); position: absolute; left: 0; top: 3px;"></i>
+          Quick Turnaround – Most repairs done in 24 hours
+        </li>
+        <li style="margin-bottom: 10px; padding-left: 30px; position: relative;">
+          <i class="fas fa-check-circle" style="color: var(--primary); position: absolute; left: 0; top: 3px;"></i>
+           Free Pickup & Dropoff – Convenience at no extra cost
+        </li>
+        <li style="margin-bottom: 10px; padding-left: 30px; position: relative;">
+          <i class="fas fa-check-circle" style="color: var(--primary); position: absolute; left: 0; top: 3px;"></i>
+           Honest Pricing – No hidden fees
+        </li>
+        <li style="margin-bottom: 10px; padding-left: 30px; position: relative;">
+          <i class="fas fa-check-circle" style="color: var(--primary); position: absolute; left: 0; top: 3px;"></i>
+          Certified Experts – 10+ years of experience
+        </li>
+      </ul>
+      <a href="contact.html" class="btn animate_animated animate_pulse">
+        <i class="fas fa-phone-alt"></i> Contact Us Today
+      </a>
+    </section>
+  </div>
+  
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+      <p>&copy; 2025 Car Service. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Add Boxicons JS at the bottom before your custom script -->
+  <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+  
+  <script>
+    // Animation trigger on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      const animateElements = document.querySelectorAll('.about-section, .team-member, .value-card');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      animateElements.forEach(el => {
+        el.style.opacity = 0;
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>

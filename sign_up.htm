@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0061ff;
+            --secondary: #60efff;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --success: #28a745;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #e4e8eb);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--dark);
+            padding: 20px;
+        }
+        
+        .signup-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .signup-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .logo i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s infinite;
+        }
+        
+        .logo h2 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .logo p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: #eee;
+            border-radius: 3px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            width: 33%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 3px;
+            transition: width 0.3s ease;
+            animation: progressShine 2s infinite;
+        }
+        
+        .form-group {
+            margin-bottom: 1.2rem;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #555;
+            font-size: 0.9rem;
+        }
+        
+        .input-icon {
+            position: absolute;
+            top: 38px;
+            left: 15px;
+            color: #777;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px 12px 40px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+            padding-left: 15px;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 97, 255, 0.1);
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 97, 255, 0.3);
+            margin-top: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 97, 255, 0.4);
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.3) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .form-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .form-footer a:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+        
+        .password-strength {
+            height: 4px;
+            background: #eee;
+            border-radius: 2px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        
+        .strength-meter {
+            height: 100%;
+            width: 0;
+            transition: width 0.3s ease, background 0.3s ease;
+        }
+        
+        .weak {
+            width: 30%;
+            background: #ff4757;
+        }
+        
+        .medium {
+            width: 60%;
+            background: #ffa502;
+        }
+        
+        .strong {
+            width: 100%;
+            background: var(--success);
+        }
+        
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            margin: 1rem 0;
+        }
+        
+        .terms input {
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        
+        .terms label {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: normal;
+        }
+        
+        .terms a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .terms a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Password toggle eye */
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 38px;
+            cursor: pointer;
+            color: #777;
+            z-index: 2;
+        }
+        
+        /* Animation classes */
+        .animate-form {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Shine animations */
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(30deg); }
+            20% { transform: translateX(100%) rotate(30deg); }
+            100% { transform: translateX(100%) rotate(30deg); }
+        }
+        
+        @keyframes progressShine {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 576px) {
+            .signup-container {
+                padding: 1.5rem;
+            }
+            
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                padding: 10px 12px 10px 38px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container animate_animated animate_fadeIn">
+        <div class="logo">
+            <i class="fas fa-user-plus"></i>
+            <h2>Create Your Account</h2>
+            <p>Join our community today</p>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+        
+        <form action="sign_up.php" method="post" class="animate-form">
+            <div class="form-group">
+                <label for="fullname">Full Name</label>
+                <div class="input-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <input type="text" id="fullname" name="fullname" required placeholder="John Doe">
+            </div>
+            
+            <div class="form-group">
+                <label for="age">Age</label>
+                <div class="input-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <input type="number" id="age" name="age" required placeholder="Your age">
+            </div>
+            
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <div class="input-icon">
+                    <i class="fas fa-birthday-cake"></i>
+                </div>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="username">Username</label>
+                <div class="input-icon">
+                    <i class="fas fa-at"></i>
+                </div>
+                <input type="text" id="username" name="username" required placeholder="johndoe">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <div class="input-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <input type="email" id="email" name="email" required placeholder="john@example.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <input type="password" id="password" name="password" required placeholder="Create a password">
+                <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                <div class="password-strength">
+                    <div class="strength-meter" id="strength-meter"></div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <div class="input-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <input type="password" id="confirm-password" name="confirm_password" required placeholder="Confirm your password">
+                <i class="fas fa-eye password-toggle" id="toggleConfirmPassword"></i>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <div class="input-icon">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <input type="tel" id="phone" name="phone" required placeholder="+1234567890">
+            </div>
+            
+            <div class="form-group">
+                <label for="alt-phone">Alternate Phone Number</label>
+                <div class="input-icon">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <input type="tel" id="alt-phone" name="alt_phone" placeholder="Optional alternate number">
+            </div>
+            
+            <div class="form-group">
+                <label for="address">Address</label>
+                <div class="input-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <textarea id="address" name="address" rows="4" maxlength="200" required placeholder="  Your full address"></textarea>
+            </div>
+            
+            <div class="terms">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+            </div>
+            
+            <button type="submit" class="btn">Create Account</button>
+        </form>
+        
+        <div class="form-footer animate_animated animatefadeIn animate_delay-1s">
+            <p>Already have an account? <a href="login.htm">Log in</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Password strength indicator
+        const passwordInput = document.getElementById('password');
+        const strengthMeter = document.getElementById('strength-meter');
+        
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            let strength = 0;
+            
+            // Check password length
+            if (password.length >= 8) strength++;
+            if (password.length >= 12) strength++;
+            
+            // Check for mixed case
+            if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
+            
+            // Check for numbers
+            if (password.match(/\d/)) strength++;
+            
+            // Check for special characters
+            if (password.match(/[^a-zA-Z0-9]/)) strength++;
+            
+            // Update strength meter
+            strengthMeter.className = 'strength-meter';
+            if (password.length > 0) {
+                if (strength <= 2) {
+                    strengthMeter.classList.add('weak');
+                } else if (strength <= 4) {
+                    strengthMeter.classList.add('medium');
+                } else {
+                    strengthMeter.classList.add('strong');
+                }
+            }
+        });
+    
+        // Password toggle visibility
+        const togglePassword = document.getElementById('togglePassword');
+        const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+        const passwordField = document.getElementById('password');
+        const confirmPasswordField = document.getElementById('confirm-password');
+    
+        togglePassword.addEventListener('click', function() {
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+    
+        toggleConfirmPassword.addEventListener('click', function() {
+            const type = confirmPasswordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmPasswordField.setAttribute('type', type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+    
+        // Log form data when terms checkbox is clicked
+        const termsCheckbox = document.getElementById('terms');
+        termsCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                const formData = {
+                    fullname: document.getElementById('fullname').value,
+                    age: document.getElementById('age').value,
+                    dob: document.getElementById('dob').value,
+                    username: document.getElementById('username').value,
+                    email: document.getElementById('email').value,
+                    password: document.getElementById('password').value,
+                    confirm_password: document.getElementById('confirm-password').value,
+                    phone: document.getElementById('phone').value,
+                    alt_phone: document.getElementById('alt-phone').value,
+                    address: document.getElementById('address').value,
+                    terms: this.checked
+                };
+    
+                console.log("Form Data:", formData);
+                
+                // Formatted output
+                console.log("--- Form Details ---");
+                console.log(`Full Name: ${formData.fullname}`);
+                console.log(`Age: ${formData.age}`);
+                console.log(`Date of Birth: ${formData.dob}`);
+                console.log(`Username: ${formData.username}`);
+                console.log(`Email: ${formData.email}`);
+                console.log(`Password: ${formData.password}`);
+                console.log(`Confirm Password: ${formData.confirm_password}`);
+                console.log(`Phone: ${formData.phone}`);
+                console.log(`Alternate Phone: ${formData.alt_phone}`);
+                console.log(`Address: ${formData.address}`);
+                console.log(`Terms Accepted: ${formData.terms}`);
+            }
+        });
+    </script>
+</body>
+</html>
